@@ -18,9 +18,11 @@
     install : npm install cookie-parser
     how to see cookies in browser => inspect -> application -> cookies
 
-    module.exports.home = function (req, res) {
-    console.log(req.cookies); // you get the cookies from browser
-    res.cookie("user_id", 12); // you change the value of cookie
-    return res.end("<h1>Express for COdeial</h1>");
-    };
-    asdf
+        module.exports.home = function (req, res) {
+        console.log(req.cookies); // you get the cookies from browser
+        res.cookie("user_id", 12); // you change the value of cookie
+        return res.end("<h1>Express for COdeial</h1>");
+        };
+        asdf
+
+    ds
