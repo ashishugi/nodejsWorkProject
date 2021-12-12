@@ -44,36 +44,38 @@ module.exports.create = function (req, res) {
 
 // user signIn or login and create a session for user
 module.exports.createSession = function (req, res) {
-  const userData = req.body;
-  console.log("reached here : ");
-  console.log(userData);
-  User.findOne({ email: userData.email }, function (err, user) {
-    if (err) {
-      console.log("error occured while sigining IN");
-      res.status(400);
-      return;
-    }
-    if (user) {
-      // password does not match
-      if (user.password !== userData.password) {
-        res.json({
-          status: true,
-          message: "password does not match",
-        });
-        return;
-      }
-      // if password matches
-      // res.cookie("user_id", user.id);
-      res.json({
-        status: true,
-        loggedIn: true,
-        message: "correct credentials",
-      });
-    } else {
-      res.json({
-        status: true,
-        message: "No User Found",
-      });
-    }
+  // after passportjs , control will come here assuming that user is now loggedIn
+  return res.json({
+    message: "here at createSession, user is loggedIn",
+    status: true, 
   });
+  // const userData = req.body;
+  // User.findOne({ email: userData.email }, function (err, user) {
+  //   if (err) {
+  //     res.status(400);
+  //     return;
+  //   }
+  //   if (user) {
+  //     // password does not match
+  //     if (user.password !== userData.password) {
+  //       res.json({
+  //         status: true,
+  //         message: "password does not match",
+  //       });
+  //       return;
+  //     }
+  //     // if password matches
+  //     // res.cookie("user_id", user.id);
+  //     res.json({
+  //       status: true,
+  //       loggedIn: true,
+  //       message: "correct credentials",
+  //     });
+  //   } else {
+  //     res.json({
+  //       status: true,
+  //       message: "No User Found",
+  //     });
+  //   }
+  // });
 };

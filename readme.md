@@ -23,3 +23,18 @@
     res.cookie("user_id", 12); // you change the value of cookie
     return res.end("<h1>Express for COdeial</h1>");
     };
+
+6.  Auth using Passport.js
+
+    NOTE :
+    router.post("/create", usersController.create); // REQUEST , MIDDLE-WARE , ACTION(CALLBACK)
+    middleware is called before the action/callback function is called
+
+    Using stratergy : Passport-local
+    npm install passport
+    npm install passport-local
+
+    Session Cookies -> these are encrypted
+    npm install express-session // for encryption of cookies
+
+    codeial/config/passport-local-stratergy.js ==> setup
