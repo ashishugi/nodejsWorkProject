@@ -1,7 +1,13 @@
+        <h1>GIT BRANCHES </h1>:
+
+            1. <i>master</i>
+            2. <i>manual-local-auth :</i>
+            3. <i>API</i>
+
 1.  nodemon index.js ===> package.json -> script -> "start":"nodemon index.js" ===> terminal ->
     npm start.
 
-2.  Setting up EJS -> views
+1.  Setting up EJS -> views
     : npm install ejs
 
     app.set("view engine",'ejs');
@@ -10,9 +16,9 @@
     src
     src/views
 
-3.  body-parser : install to read the post data send to backend.
-4.  Authentication
-5.  Cookies : cookies are the files stored by the browser, and this file is sent to server with each
+1.  body-parser : install to read the post data send to backend.
+1.  Authentication
+1.  Cookies : cookies are the files stored by the browser, and this file is sent to server with each
     and every request. server send back the files back to browser . User for auth at server and used
     to store some data.
     install : npm install cookie-parser
@@ -24,7 +30,7 @@
     return res.end("<h1>Express for COdeial</h1>");
     };
 
-6.  Auth using Passport.js
+1.  Auth using Passport.js
 
     NOTE :
     router.post("/create", usersController.create); // REQUEST , MIDDLE-WARE , ACTION(CALLBACK)
