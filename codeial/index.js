@@ -10,6 +10,9 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 
+// passport+jwt
+const passportJWT = require("./config/passport-jwt-stratergy");
+
 //cors error
 const cors = require("cors");
 

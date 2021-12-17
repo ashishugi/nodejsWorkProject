@@ -7,7 +7,7 @@
 1.  nodemon index.js ===> package.json -> script -> "start":"nodemon index.js" ===> terminal ->
     npm start.
 
-1.  Setting up EJS -> views
+2.  Setting up EJS -> views
     : npm install ejs
 
     app.set("view engine",'ejs');
@@ -16,9 +16,9 @@
     src
     src/views
 
-1.  body-parser : install to read the post data send to backend.
-1.  Authentication
-1.  Cookies : cookies are the files stored by the browser, and this file is sent to server with each
+3.  body-parser : install to read the post data send to backend.
+4.  Authentication
+5.  Cookies : cookies are the files stored by the browser, and this file is sent to server with each
     and every request. server send back the files back to browser . User for auth at server and used
     to store some data.
     install : npm install cookie-parser
@@ -30,7 +30,7 @@
     return res.end("<h1>Express for COdeial</h1>");
     };
 
-1.  Auth using Passport.js
+6.  Auth using Passport.js
 
     NOTE :
     router.post("/create", usersController.create); // REQUEST , MIDDLE-WARE , ACTION(CALLBACK)
@@ -44,3 +44,13 @@
     npm install express-session // for encryption of cookies
 
     codeial/config/passport-local-stratergy.js ==> setup
+
+7.  API:
+    All the api's and its version's(ex : v1, v2) will have its own routing and index.js
+    each version of API will have index
+
+8.  PassPort + JWT
+
+    npm install passport-jwt
+    mention about this passport stratergy in index.js page, also make new passport-jwt-stratergy.js in
+    /config file

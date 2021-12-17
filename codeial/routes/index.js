@@ -10,4 +10,7 @@ router.use("/posts", require("./posts"));
 // for any router
 // router.use('/routerName,require("filename"));
 
+// for /api
+
+router.use("/api", require("./api"));
 module.exports = router;
