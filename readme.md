@@ -54,3 +54,6 @@
     npm install passport-jwt
     mention about this passport stratergy in index.js page, also make new passport-jwt-stratergy.js in
     /config file
+
+9.  JSON WEB TOKEN
+    npm install jsonwebtoken
