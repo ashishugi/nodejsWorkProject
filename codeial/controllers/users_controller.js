@@ -1,7 +1,6 @@
 const User = require("../models/user");
 
 module.exports.profile = function (req, res) {
-  console.log(req.cookies);
   return res.end("<h1>User Profile</h1>");
 };
 
@@ -47,7 +46,7 @@ module.exports.createSession = function (req, res) {
   // after passportjs , control will come here assuming that user is now loggedIn
   return res.json({
     message: "here at createSession, user is loggedIn",
-    status: true, 
+    status: true,
   });
   // const userData = req.body;
   // User.findOne({ email: userData.email }, function (err, user) {

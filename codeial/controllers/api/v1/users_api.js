@@ -1,6 +1,14 @@
 const User = require("../../../models/user");
 const jwt = require("jsonwebtoken");
 
+module.exports.index = async function (req, res) {
+  let users = await User.find({});
+  return res.json(200, {
+    message: "Lists of users",
+    users: users,
+  });
+};
+
 module.exports.createSession = async function (req, res) {
   try {
     let user = await User.findOne({ email: req.body.email });

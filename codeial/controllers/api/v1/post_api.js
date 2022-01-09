@@ -2,15 +2,17 @@ const User = require("../../../models/user");
 const Post = require("../../../models/post");
 
 module.exports.index = async function (req, res) {
-  let users = await User.find({});
+  let post = await Post.find({});
   return res.json(200, {
     message: "Lists of Posts",
-    posts: users,
+    posts: post,
   });
 };
 
 // creating post
 module.exports.create = async function (req, res) {
+  console.log("request reached here");
+  console.log(req.body);
   try {
     let post = await Post.create({
       content: req.body.content,

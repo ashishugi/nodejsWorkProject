@@ -57,3 +57,14 @@
 
 9.  JSON WEB TOKEN
     npm install jsonwebtoken
+
+10. router.post(
+    "/create-session",
+    passport.authenticate("jwt", { session: false }),
+    usersApi.createSession
+    );
+
+    passport.authenticate("jwt", { session: false }),
+    here you need to send the Authorization Bearer token in the request from the frontend to
+    backend to authenticate the user
+    postman -- > request --> Header --> Authorization : Bearer token_generated for user
