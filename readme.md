@@ -68,3 +68,21 @@
     here you need to send the Authorization Bearer token in the request from the frontend to
     backend to authenticate the user
     postman -- > request --> Header --> Authorization : Bearer token_generated for user
+
+BRANCH : jobs_mailer
+
+11. For sending or requsting simple we use HTTP or HTTPS protocols
+    but for emails we use SMTP (simple mail transfer protocol)
+
+    a. Nodemailer
+    b. config
+    c. mailer
+    d. Templates (html content etc.)
+
+    npm install nodemailer
+
+    config/nodemailer.js
+    mailers/
+
+    if google do not allow to send email then : search : ENABLE LESS SECURE APPS
+    to -> myaccount.google.com/lesssecureapp -> Off/ONN the switch /toggle

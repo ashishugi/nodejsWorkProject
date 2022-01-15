@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const signUpMailer = require("../mailers/signup_mailer");
 
 module.exports.profile = function (req, res) {
   return res.end("<h1>User Profile</h1>");
@@ -26,6 +27,7 @@ module.exports.create = function (req, res) {
           if (err) {
             return;
           }
+          signUpMailer.newSignUp();
           return res.status(200).json({
             success: true,
             message: "User successfully saved!",
