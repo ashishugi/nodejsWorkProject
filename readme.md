@@ -86,3 +86,49 @@ BRANCH : jobs_mailer
 
     if google do not allow to send email then : search : ENABLE LESS SECURE APPS
     to -> myaccount.google.com/lesssecureapp -> Off/ONN the switch /toggle
+
+12. Delayed Jobs
+    Here put task inside some queue , and can be sent to user with some Delay
+    KUE :
+    npm install kue (priority queue backed by redis (for nodejs))
+
+    Example : let 's have 3 queues for which we need emails to be send to the user
+
+            -> generall emails | 3
+            -> notifications   | 2
+            -> otp             | 1
+
+            high priority is of otp then notifications and then last is for general emails
+
+            there is a kue worker for each of the queues, so here there will be 3 kue workers
+            these worker will ask the queue every after fews second as per the priority, if any task the executes it else it again goes to sleep
+            for sometime.
+
+            REDIS server maintains therese KUE queues. REDIS store the data in json form and stored in RAM, so if system gets off
+            then the data of queues get vanished.
+
+
+
+            KUE workers (pointer to above 3 queue) --- ASK ---> REDIS(JSON form)(ask if there is any task for them based on priority) --->
+
+
+
+        Need to install redis : Ubuntu
+            1. sudo apt-get update
+            2. sudo apt-get upgrade
+            3. sudo apt-get install redis-server
+
+        a.redis runs in background
+        b.to run redis : redis-server
+        c.check if redis running : redis-cli ping  ---> if redis running output would be 'pong'
+        d.USE of redis : act as a in-memory data structure (act as RAM), or can be used as a cache
+        ex: if some vedio gets viral, then if many user searches for it. Then instead of taking everytime from the backend database we
+        can store it in redis cache and respond to the user very fastly.
+
+
+        intial config : /config/kue.js
+        setting workers: workers/
+
+        GUI redis : run --> cd codeial --> ./node_modules/kue/bin/kue-dashboard  --> it will run on a port: 3000
+
+        in other languages we have multi-threading to run the delayed jobs - > java, ruby on rails etc.
