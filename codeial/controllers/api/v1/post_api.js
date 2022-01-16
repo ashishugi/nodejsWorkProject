@@ -14,21 +14,17 @@ module.exports.create = async function (req, res) {
   console.log("request reached here");
   console.log(req.body);
   try {
-    let post = await Post.create({
-      content: req.body.content,
-      user: req.user._id,
-    });
-    if (req.xhr) {
-      // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
-      post = await post.populate("user", "name").execPopulate();
-
-      return res.status(200).json({
-        data: {
-          post: post,
-        },
-        message: "Post created!",
-      });
-    }
+    Post.create(
+      {
+        content: req.body.content,
+        user: req.body.user._id,
+      },
+      function (err, post) {
+        if (err) {
+          console.log("err in creating form");
+        }
+      }
+    );
   } catch (err) {
     return res.json(500).json({
       message: "Internal Server Error",

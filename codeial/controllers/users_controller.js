@@ -1,6 +1,9 @@
 const User = require("../models/user");
 const signUpMailer = require("../mailers/signup_mailer");
 
+const queue = require("../config/kue");
+const signupMailWorker = require("../workers/signupWorker");
+
 module.exports.profile = function (req, res) {
   return res.end("<h1>User Profile</h1>");
 };
@@ -27,7 +30,17 @@ module.exports.create = function (req, res) {
           if (err) {
             return;
           }
-          signUpMailer.newSignUp();
+          // signUpMailer.newSignUp();
+          // above line is being commented as email worker is used below
+          let job = queue
+            .create("signupMails", "argument to be passed here")
+            .save(function (err) {
+              // worker name in signupworker and here should be same
+              if (err) {
+                console.log("error in creating the signup worker queue");
+              }
+              console.log(job.id);
+            });
           return res.status(200).json({
             success: true,
             message: "User successfully saved!",

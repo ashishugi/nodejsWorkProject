@@ -30,7 +30,7 @@ const Post = (props) => {
       console.log("inside post");
       const url = "http://localhost:8000/posts";
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFiZGUyZDBhZDFiMjk1NTE4ZDQyM2E5IiwiZW1haWwiOiJhQGEuY29tIiwiaWF0IjoxNjQyMjY3NDQyLCJleHAiOjE2NDIyNzQ2NDJ9.kAl03oiO7NyGsyv9K0qyJ_8Obw18f9emxI7b3TxBNyM";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFiZGUyZDBhZDFiMjk1NTE4ZDQyM2E5IiwiZW1haWwiOiJhQGEuY29tIiwiaWF0IjoxNjQyMzQ0NjMwLCJleHAiOjE2NDIzNTE4MzB9.ngzJh3uxyxa7fG3AHRL1vjtTl_aYa0qiA6T3AGSLV5s";
       axios
         .post(
           url,
