@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 const Post = (props) => {
   const [postData, setPostData] = useState("");
@@ -24,6 +25,39 @@ const Post = (props) => {
     e.preventDefault();
   };
   console.log(postData);
+  useEffect(() => {
+    function getData() {
+      console.log("inside post");
+      const url = "http://localhost:8000/posts";
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFiZGUyZDBhZDFiMjk1NTE4ZDQyM2E5IiwiZW1haWwiOiJhQGEuY29tIiwiaWF0IjoxNjQyMjY3NDQyLCJleHAiOjE2NDIyNzQ2NDJ9.kAl03oiO7NyGsyv9K0qyJ_8Obw18f9emxI7b3TxBNyM";
+      axios
+        .post(
+          url,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(function (response) {
+          console.log("response is made");
+          console.log(response);
+          if (!response.data.success) {
+            console.log("inside the response .data");
+            props.history.push("/signin");
+            return <Redirect to="/signin" />;
+          }
+        })
+        .catch(function (error) {
+          console.log("some error occurred");
+          console.log(error);
+        });
+    }
+    getData();
+  });
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Hey there at Post Page</h1>

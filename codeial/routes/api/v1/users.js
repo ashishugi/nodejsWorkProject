@@ -11,6 +11,7 @@ router.post(
   usersApi.createSession
 );
 
+router.post("/sign-in", usersApi.login);
 module.exports = router;
 
 // here you need to send the Authorization Bearer token in the request from the frontend to

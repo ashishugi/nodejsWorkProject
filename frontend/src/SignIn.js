@@ -8,7 +8,7 @@ const SignIn = (props) => {
   });
   const handleSubmit = (e) => {
     console.log(input);
-    const url = "http://localhost:8000/users/signin";
+    const url = "http://localhost:8000/api/v1/users/sign-in";
     axios
       .post(url, {
         email: input.email,
@@ -16,9 +16,10 @@ const SignIn = (props) => {
       })
       .then(function (response) {
         console.log("response is made");
-        console.log(response);
+        console.log(response.data);
       })
       .catch(function (error) {
+        console.log("some error occurred");
         console.log(error);
       });
 
