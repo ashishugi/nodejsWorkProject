@@ -35,3 +35,40 @@ module.exports.createSession = async function (req, res) {
     });
   }
 };
+
+module.exports.login = async function (req, res) {
+  try {
+    const { email, password } = req.body;
+    // Validate user input
+    if (!(email && password)) {
+      res.status(400).send("All input is required");
+    }
+
+    // Validate if user exist in our database
+    const user = await User.findOne({ email });
+    if (user && user.password === password) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+      // save user token
+      user.token = token;
+      console.log(user.token);
+      // user
+      res.status(200).json({
+        success: true,
+        token: token,
+      });
+      return;
+    }
+    res.status(200).send("Invalid Credentials");
+  } catch (err) {
+    console.log;
+    console.log(err);
+  }
+};
