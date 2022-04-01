@@ -11,8 +11,7 @@ module.exports.index = async function (req, res) {
 
 // creating post
 module.exports.create = async function (req, res) {
-  console.log("request reached here");
-  console.log(req.body);
+  const data = req.body;
   try {
     Post.create(
       {
@@ -22,10 +21,22 @@ module.exports.create = async function (req, res) {
       function (err, post) {
         if (err) {
           console.log("err in creating form");
+          return res.json({
+            success: false,
+            message: "some error occured",
+          });
         }
+        return res.json({
+          success: true,
+          message: "saved successfully",
+          data: {
+            post: post,
+          },
+        });
       }
     );
   } catch (err) {
+    console.log("+", err);
     return res.json(500).json({
       message: "Internal Server Error",
     });

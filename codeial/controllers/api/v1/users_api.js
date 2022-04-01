@@ -62,7 +62,9 @@ module.exports.login = async function (req, res) {
       // user
       res.status(200).json({
         success: true,
-        token: token,
+        data: {
+          token: token,
+        },
       });
       return;
     }
@@ -70,5 +72,39 @@ module.exports.login = async function (req, res) {
   } catch (err) {
     console.log;
     console.log(err);
+  }
+};
+
+module.exports.update = async function (req, res) {
+  console.log("@update", req.params, req.body);
+  const userId = req.body.user.id;
+  if (userId) {
+    try {
+      let user = await User.findById(userId);
+      console.log("found user", user);
+      User.uploadedAvatar(req, res, function (err) {
+        if (err) {
+          return res.status(200).json({
+            success: false,
+            error: "error occured while uploading --> multer error",
+          });
+        }
+        console.log(req.file);
+        return res.status(200).json({
+          success: true,
+          message: "uploaded successfully",
+        });
+      });
+    } catch (err) {
+      return res.status(200).json({
+        success: false,
+        error: err,
+      });
+    }
+  } else {
+    res.status(200).json({
+      success: false,
+      message: "userId does not exist",
+    });
   }
 };

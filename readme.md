@@ -132,3 +132,16 @@ BRANCH : jobs_mailer
         GUI redis : run --> cd codeial --> ./node_modules/kue/bin/kue-dashboard  --> it will run on a port: 3000
 
         in other languages we have multi-threading to run the delayed jobs - > java, ruby on rails etc.
+
+13. Async and Await in Nodejs
+
+14. File Uploading
+
+    image/vedio
+    store in local/aws
+    (FE/ BE ) -----> path of the data is stored at DB ---> FE make req of that path to server
+
+    npm install multer
+
+    -> Note in case of uploading, in nodejs you cannot directly access the data as req.params.value
+    because file will be of uplaod so, parse cannot parse that

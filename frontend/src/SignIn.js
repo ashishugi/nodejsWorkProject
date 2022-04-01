@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+import { setCookie, getCookie } from "./helper/cookies";
+
 const SignIn = (props) => {
   const [input, setInput] = useState({
     email: "",
@@ -17,6 +19,17 @@ const SignIn = (props) => {
       .then(function (response) {
         console.log("response is made");
         console.log(response.data);
+        if (response.data.success) {
+          const { data: { data: { token = "" } = {} } = {} } = response;
+          // console.log("token", token);
+          // console.log("-->", response.data.data.token);
+          // let date = new Date(Date.now() + 86400e3);
+          // date = date.toUTCString();
+          // console.log(`token=${token}; expires=${date}`);
+          // setCookie(`token=${token}; expires=${date}`);
+          // console.log("->", getCookie("token"));
+          localStorage.setItem("token", token);
+        }
       })
       .catch(function (error) {
         console.log("some error occurred");

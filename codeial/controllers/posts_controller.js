@@ -17,3 +17,21 @@ module.exports.posts = function (req, res) {
     message: "@ the post page",
   });
 };
+
+module.exports.getPosts = async function (req, res) {
+  try {
+    const postData = await Post.find({});
+    if (postData) {
+      return res.status(200).json({
+        success: true,
+        data: {
+          posts: postData,
+        },
+      });
+    }
+    return res.status(200).json({
+      success: false,
+      error: "someerror occured",
+    });
+  } catch (err) {}
+};

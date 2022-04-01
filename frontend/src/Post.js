@@ -7,13 +7,24 @@ const Post = (props) => {
   const handleSubmit = (e) => {
     console.log("submited");
     const url = "http://localhost:8000/api/v1/posts";
+    const token = localStorage.getItem("token");
+    console.log("here @ post", token);
     axios
-      .post(url, {
-        content: postData,
-        user: {
-          _id: "61b4d0000b1967c2a868f68c",
+      .post(
+        url,
+        {
+          content: postData,
+          user: {
+            _id: "61bde2d0ad1b295518d423a9",
+          },
         },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(function (response) {
         console.log("response is made");
         console.log(response);
@@ -26,38 +37,48 @@ const Post = (props) => {
   };
   console.log(postData);
   useEffect(() => {
-    function getData() {
-      console.log("inside post");
-      const url = "http://localhost:8000/posts";
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjFiZGUyZDBhZDFiMjk1NTE4ZDQyM2E5IiwiZW1haWwiOiJhQGEuY29tIiwiaWF0IjoxNjQyMzQ0NjMwLCJleHAiOjE2NDIzNTE4MzB9.ngzJh3uxyxa7fG3AHRL1vjtTl_aYa0qiA6T3AGSLV5s";
-      axios
-        .post(
-          url,
-          {},
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then(function (response) {
-          console.log("response is made");
-          console.log(response);
-          if (!response.data.success) {
-            console.log("inside the response .data");
-            props.history.push("/signin");
-            return <Redirect to="/signin" />;
-          }
-        })
-        .catch(function (error) {
-          console.log("some error occurred");
-          console.log(error);
-        });
-    }
+    isLoggedIn();
     getData();
   });
+
+  const getData = () => {
+    const url = "http://localhost:8000/posts";
+    const token = localStorage.getItem("token");
+    console.log("inside post", token);
+    axios
+      .get(
+        url,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log("response is made");
+        console.log(response);
+        if (!response.data.success) {
+          console.log("inside the response .data");
+          props.history.push("/signin");
+          return <Redirect to="/signin" />;
+        }
+      })
+      .catch(function (error) {
+        console.log("some error occurred");
+        console.log(error);
+      });
+  };
+  const isLoggedIn = () => {
+    const token = localStorage.getItem("token");
+    // if (!token) {
+    //   console.log("token is invalid");
+    //   window.location.href = "/";
+    //   return;
+    // }
+    // console.log("token is valid");
+  };
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Hey there at Post Page</h1>

@@ -8,7 +8,7 @@ module.exports.profile = function (req, res) {
   return res.end("<h1>User Profile</h1>");
 };
 
-// get the signup data
+// get the signup dataUpload Image here !!!
 module.exports.create = function (req, res) {
   const userData = req.body;
   User.findOne({ email: userData.email }, function (err, user) {
